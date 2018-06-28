@@ -39,13 +39,13 @@ var level01 = function (window) {
         obstacleImage.y = -25;
         myObstacle.rotationalVelocity = -10;
         }
-        createSawBlade(400,360);
-        createSawBlade(650,360);
-        createSawBlade(850,470);
-        createSawBlade(1200,470);
-        createSawBlade(1400,470);
-        createSawBlade(1600,470);
-        createSawBlade(2000,470);
+        createSawBlade(400,groundY-110);
+        createSawBlade(650,groundY-110);
+        createSawBlade(850,groundY-10);
+        createSawBlade(1200,groundY-110);
+        createSawBlade(1400,groundY-110);
+        createSawBlade(1600,groundY-10);
+        createSawBlade(2000,groundY-10);
         
     function createEnemy(x,y){       
         var enemy = game.createGameItem('enemy', 25);
@@ -75,6 +75,27 @@ var level01 = function (window) {
         createEnemy(1400,groundY-50);
         createEnemy(1800,groundY-50);
         createEnemy(2000,groundY-50);
+        
+ function bonus(x,y){
+           var bonus = game.createGameItem('point',25);
+           var trophy = draw.bitmap('img/Trophy.png');
+           trophy.scaleX = .05;
+           trophy.scaleY = .05;
+           trophy.x=-25;
+           trophy.y=-25;
+           bonus.x = x;
+           bonus.y = y;
+           bonus.addChild(trophy);
+           game.addGameItem(bonus);
+           bonus.velocityX = -1;
+           bonus.onPlayerCollision = function() {
+               console.log('The Trophy has hit halle!');
+               game.increaseScore(10000);
+                game.changeIntegrity(-100);
+               bonus.fadeOut();
+           };
+     }
+     bonus(2000,groundY-1);
     };
     
 };

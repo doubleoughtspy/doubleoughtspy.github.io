@@ -28,6 +28,7 @@ var background = function (window) {
        var buildingsss = [];
        var building1;
        var building2;
+       var trees = [];
        // Add any variables that will be used by render AND update here:
        
        // add objects for display inb ackground
@@ -65,34 +66,37 @@ var background = function (window) {
            var buildingHeight = 400;
            for(var i=0;i<6;++i) {
                building = draw.rect(100,buildingHeight,'LightGray','Black',1);
-               building.x = 400*i;
+               building.x = 350*i;
                building.y = groundY-buildingHeight;
                background.addChild(building);
                buildings.push(building);
            }
            var building1Height = 300;
-           for (i=0;i<8;i++) {
+           for (i=0;i<6;i++) {
                building1 = draw.rect(120,building1Height,'LightGray','Black',2);
-               building1.x = 270*i;
+               building1.x = 360*i;
                building1.y = groundY-building1Height;
                background.addChild(building1);
                buildingss.push(building1);
            }
            var building2Height = 150;
-           for (i=0;i<9;i++) {
+           for (i=0;i<6;i++) {
                building2 = draw.rect(120,building2Height,'LightGray','Black',2);
-               building2.x = 250*i;
+               building2.x = 380*i;
                building2.y = groundY-building2Height;
                background.addChild(building2);
                buildingsss.push(building2);
            }
            // TODO 4: Part 1 - Add a tree
+           for(var i=0;i<4;i++){
            tree = draw.bitmap('img/tree.png');
-           tree.x = canvasWidth;
-           tree.y = 375;
+           tree.x = 550*i;
+           tree.y = groundY-100;
            tree.scaleX = .5;
            tree.scaleY = .5;
            background.addChild(tree);
+           trees.push(tree);
+           }
        }
        
        // Perform background animation
@@ -104,10 +108,7 @@ var background = function (window) {
            var groundY = ground.y;
            
            // TODO 4: Part 2 - Move the tree!
-           tree.x = tree.x - 2;
-           if(tree.x < -200) {
-               tree.x = canvasWidth;
-           }
+           
            // TODO 5: Part 2 - Parallax
            for (var i=0; i< buildings.length; i++){
               buildings[i].x = buildings[i].x - 2;
@@ -127,6 +128,13 @@ var background = function (window) {
                buildingsss[i].x = canvasWidth;
            }
        }
+       
+              for(var i = 0; i < trees.length; i++) {
+           trees[i].x = trees[i].x - 2;
+           if(trees[i].x < -200) 
+               trees[i].x = canvasWidth;
+              }
+           
        }
 
        background = new createjs.Container();
